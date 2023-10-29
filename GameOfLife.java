@@ -9,24 +9,29 @@ public class GameOfLife {
         initGame();
     }
 
-    /*public GameOfLife(int[][] initialState) {
-        Random rand = new Random();
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                matrix[i][j] = rand.nextInt(1);
-            }
-        }
-    }*/
+    /*
+     * public GameOfLife(int[][] initialState) {
+     * Random rand = new Random();
+     * for (int i = 0; i < 3; i++) {
+     * for (int j = 0; j < 3; j++) {
+     * matrix[i][j] = rand.nextInt(1);
+     * }
+     * }
+     * }
+     */
 
     public void initGame() {
         this.matrix = new int[Size][Size];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < Size; i++) {
+            for (int j = 0; j < Size; j++) {
                 matrix[i][j] = j;
+                System.out.print(matrix[i][j]);
             }
+            System.out.println("");
         }
 
     }
+
     public void drawBoard(String[][] board){
         for (int i = 0; i < 3; i++) { //line 88
             for (int j = 0; j < 3; j++) {
@@ -46,14 +51,24 @@ public class GameOfLife {
         }
 
     // instants-metoder
-    public int liveNeighbours(int x, int y) {
-        return matrix[x][y];
-        /*
-         * for (int i = 0; i < 3; i++) {
-         * for(int j = 0; j<3; j++){
-         * }
-         * }
-         */
+    public int AliveNeighbours(int x, int y) {
+        int counter = 0;
+        System.out.println("matrix x,y: "+matrix[x][y]);
+        for (int i = 0; i < 3; i++) {
+            if (matrix[x - 1][i] == 1) {
+                counter += 1;
+            }
+            if (matrix[x][i] == 1) {
+                counter += 1;
+            }
+            if (matrix[x + 1][i] == 1) {
+                counter += 1;
+            }
+        }
+        if (matrix[x][y]==1){
+            counter -=1;
+        }
+        return counter;
     }
 
     public void nextState() {
