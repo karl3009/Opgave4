@@ -1,5 +1,5 @@
 public class GameOfLife {
-    public GameOfLife(int n){
+    public GameOfLife(int n) {
         nextState();
     }
 
@@ -16,10 +16,12 @@ public class GameOfLife {
         initialState = int matrix[]={{is1,is2,is3},{is4,is5,is6},{is7,is8,is9}};
     }
 
-    public void liveNeighbours(int x,int y){
-        int[][] neighbours;
-        for(int i=0; i<3;i++){
-            
+    public void liveNeighbours(int x, int y) {
+        int[][] neighbours = {{1,0,1,0},{1,0,1,0},{1,0,1,0},{1,0,1,0}};
+        System.out.println(neighbours[0][0]);
+        for (int i = 0; i < 3; i++) {
+            for(int j = 0; j<3; j++){
+            }
         }
     }
 
