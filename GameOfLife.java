@@ -9,47 +9,95 @@ public class GameOfLife {
         initGame();
     }
 
-    /*public GameOfLife(int[][] initialState) {
-        Random rand = new Random();
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                matrix[i][j] = rand.nextInt(1);
-            }
-        }
-    }*/
+    /*
+     * public GameOfLife(int[][] initialState) {
+     * Random rand = new Random();
+     * for (int i = 0; i < 3; i++) {
+     * for (int j = 0; j < 3; j++) {
+     * matrix[i][j] = rand.nextInt(1);
+     * }
+     * }
+     * }
+     */
 
     public void initGame() {
+        double scale = Size + Size / 4;
+        StdDraw.setXscale(-scale, scale);
+        StdDraw.setYscale(-scale, scale);
+        StdDraw.setPenRadius(0.5 / scale);
+        StdDraw.setPenColor(StdDraw.BLACK);
         this.matrix = new int[Size][Size];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < Size; i++) {
+            for (int j = 0; j < Size; j++) {
                 matrix[i][j] = j;
+                System.out.print(matrix[i][j]);
             }
+            System.out.println("");
         }
+        drawMatrix(matrix);
 
     }
-    public static void drawMatrix(matrix[][]){
-        for (int i = 0; i <= matrix.size; i++) {
-            for (int j = 0; j <= matrix[0].size; j++){
-                StdDraw.point(j,i);
+
+    public void drawMatrix(int[][] m) {
+        StdDraw.clear();
+        for (int i = 0; i <= Size; i++) {
+            for (int j = 0; j <= Size; j++) {
+                if (matrix[i][j] == 1) {
+                    StdDraw.point(i, j);
+                }
             }
         }
     }
 
     // instants-metoder
-    public int liveNeighbours(int x, int y) {
-        return matrix[x][y];
-        /*
-         * for (int i = 0; i < 3; i++) {
-         * for(int j = 0; j<3; j++){
-         * }
-         * }
-         */
+    public int AliveNeighbours(int x, int y) {
+        int counter = 0;
+        System.out.println("matrix x,y: " + matrix[x][y]);
+        for (int i = 0; i < 3; i++) {
+            if (x == 0) {
+                // skip next
+            } else if (matrix[x - 1][i] == 1) {
+                counter += 1;
+            }
+            if (matrix[x][i] == 1) {
+                counter += 1;
+            }
+            if (x == Size) {
+                // skip next
+            } else if (matrix[x + 1][i] == 1) {
+                counter += 1;
+            }
+        }
+        if (matrix[x][y] == 1) {
+            counter -= 1;
+        }
+        return counter;
     }
 
     public void nextState() {
-
+        for (int i = 0; i < Size; i++) {
+            for (int j = 0; j < Size; j++) {
+                if (matrix[i][j] == 1 && (AliveNeighbours(i, j) < 2 || AliveNeighbours(i, j) > 3)) {
+                    matrix[i][j] = 0;
+                } else if (matrix[i][j] == 0 && AliveNeighbours(i, j) == 3) {
+                    matrix[i][j] = 1;
+                } else {
+                    matrix[i][j] = 1;
+                }
+            }
+        }
+        printMatrix(matrix);
+        drawMatrix(matrix);
     }
 
+    public void printMatrix(int[][] m) {
+        for (int i = 0; i < Size; i++) {
+            for (int j = 0; j < Size; j++) {
+                System.out.print(m[i][j]);
+            }
+            System.out.println("");
+        }
+    }
     /*
      * public void nextState() {
      * int cell = n;
