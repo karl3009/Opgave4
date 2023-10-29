@@ -20,6 +20,19 @@ public class GameOfLife {
      * }
      */
 
+    public void readFile() throws FileNotFoundException {
+        Scanner input = new Scanner(new File("./gol/toad.gol"));
+        String n = input.nextLine();
+        int rows = n.length();
+        int cols = 0;
+        while (input.hasNextInt()==false){
+            cols += 1;
+        }
+        if (input.nextInt()==1){
+            matrix[rows][cols]=1;
+        }
+    }
+    
     public void initGame() {
         double scale = Size + Size / 4;
         StdDraw.setXscale(-scale, scale);
@@ -38,6 +51,33 @@ public class GameOfLife {
 
     }
 
+    public void drawFiletrix(int[][] m) {
+
+        try {
+            int rows = 0;
+            int cols = 0;
+            readFile();
+            
+            for (int i = 0; i <= rows; i++) {
+                for (int j = 0; j <= cols; j++) {
+                    if (matrix[rows][cols] == 1) {
+                        StdDraw.point(i, j);
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+            for (int i = 0; i <= Size; i++) {
+                for (int j = 0; j <= Size; j++) {
+                    if (matrix[i][j] == 1) {
+                        StdDraw.point(i, j);
+                    }
+                }
+            }
+        }
+
+    }
+    
     public void drawMatrix(int[][] m) {
         StdDraw.clear();
         for (int i = 0; i <= Size; i++) {
