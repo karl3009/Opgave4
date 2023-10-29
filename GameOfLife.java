@@ -24,7 +24,7 @@ public class GameOfLife {
         this.matrix = new int[Size][Size];
         for (int i = 0; i < Size; i++) {
             for (int j = 0; j < Size; j++) {
-                matrix[i][j] = j;
+                matrix[i][j] = 1;
                 System.out.print(matrix[i][j]);
             }
             System.out.println("");
@@ -53,24 +53,12 @@ public class GameOfLife {
     // instants-metoder
     public int AliveNeighbours(int x, int y) {
         int counter = 0;
-        System.out.println("matrix x,y: "+matrix[x][y]);
-        for (int i = 0; i < 3; i++) {
-            if (x==0){
-                //skip next
+        for(int i = -1; i<2;i++){
+            if (matrix[x-1][-i]=){
+
             }
-            else if (matrix[x - 1][i] == 1) {
-                counter += 1;
-            }
-            if (matrix[x][i] == 1) {
-                counter += 1;
-            }
-            if(x==Size){
-                //skip next
-            }
-            else if (matrix[x + 1][i] == 1) {
-                counter += 1;
-            }
-        }
+        } 
+
         if (matrix[x][y]==1){
             counter -=1;
         }
@@ -78,6 +66,29 @@ public class GameOfLife {
     }
 
     public void nextState() {
+        for (int i = 0; i < Size; i++) {
+            for (int j = 0; j < Size; j++) {
+                if(matrix[i][j]==1&&(AliveNeighbours(i,j)<2||AliveNeighbours(i,j)>3)){
+                    matrix[i][j]=0;
+                }
+                else if (matrix[i][j]==0&&AliveNeighbours(i,j)==3){
+                    matrix[i][j]=1;
+                }
+                else{
+                    matrix[i][j]=1;
+                }
+            }
+        }
+        printMatrix(matrix);
+    }
+
+    public void printMatrix(int[][] m){
+        for (int i = 0; i < Size; i++) {
+            for (int j = 0; j < Size; j++){
+                System.out.print(m[i][j]);
+            }
+            System.out.println("");
+        }
     }
 
     /*
