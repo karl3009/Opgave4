@@ -27,6 +27,23 @@ public class GameOfLife {
         }
 
     }
+    public void drawBoard(String[][] board){
+        for (int i = 0; i < 3; i++) { //line 88
+            for (int j = 0; j < 3; j++) {
+                int r = board.length;
+                int c = board[0].length;
+                double R = new Double(r);
+                double C = new Double(c);
+    
+            StdDraw.setXscale(0,C);
+            StdDraw.setYscale(0,R);
+            StdDraw.setCanvasSize(500,500);
+            StdDraw.setPenRadius(0.05);
+            StdDraw.setPenColor(StdDraw.BLUE);
+            StdDraw.rectangle((C/2), (R/2), (C/2), (R/2));
+            StdDraw.close();
+            }
+        }
 
     // instants-metoder
     public int liveNeighbours(int x, int y) {
