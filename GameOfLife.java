@@ -53,38 +53,120 @@ public class GameOfLife {
     // instants-metoder
     public int AliveNeighbours(int x, int y) {
         int counter = 0;
-        for(int i = -1; i<2;i++){
-            if (matrix[x-1][-i]=){
-
+        for (int i = -1; i < 2; i++) {
+            if (x == 0 && y == 0) {
+                for (int j = 0; j < 2; j++) {
+                    if (matrix[x][y + j] == 1) {
+                        counter = +1;
+                    }
+                    if (matrix[x + 1][y + j] == 1) {
+                        counter = +1;
+                    }
+                }
+            } else if (x == Size && y == 0) {
+                for (int j = 0; j < 2; j++) {
+                    if (matrix[x - 1][y + j] == 1) {
+                        counter = +1;
+                    }
+                    if (matrix[x][y + j] == 1) {
+                        counter = +1;
+                    }
+                }
+            } else if (x == 0 && y == Size) {
+                for (int j = 0; j < 2; j++) {
+                    if (matrix[x][y - j] == 1) {
+                        counter = +1;
+                    }
+                    if (matrix[x + 1][y - j] == 1) {
+                        counter = +1;
+                    }
+                }
+            } else if (x == Size && y == Size) {
+                for (int j = 0; j < 2; j++) {
+                    if (matrix[x][y - j] == 1) {
+                        counter = +1;
+                    }
+                    if (matrix[x - 1][y - j] == 1) {
+                        counter = +1;
+                    }
+                }
             }
-        } 
 
-        if (matrix[x][y]==1){
-            counter -=1;
+            else if (x == 0) {
+                if (matrix[x][y + i] == 1) {
+                    counter = +1;
+                }
+                if (matrix[x + 1][y + i] == 1) {
+                    counter = +1;
+                }
+            } else if (y == 0) {
+                for (int j = 0; j < 2; j++) {
+                    if (matrix[x + 1][y + j] == 1) {
+                        counter = +1;
+                    }
+                    if (matrix[x][y + j] == 1) {
+                        counter = +1;
+                    }
+                    if (matrix[x - 1][y + j] == 1) {
+                        counter = +1;
+                    }
+                }
+            } else if (x == Size) {
+                if (matrix[x][y + i] == 1) {
+                    counter = +1;
+                }
+                if (matrix[x - 1][y + i] == 1) {
+                    counter = +1;
+                }
+            } else if (y == Size) {
+                for (int j = 0; j < 2; j++) {
+                    if (matrix[x + 1][y - j] == 1) {
+                        counter = +1;
+                    }
+                    if (matrix[x][y - j] == 1) {
+                        counter = +1;
+                    }
+                    if (matrix[x - 1][y - j] == 1) {
+                        counter = +1;
+                    }
+                }
+            } else {
+                if (matrix[x + 1][y + i] == 1) {
+                    counter = +1;
+                }
+                if (matrix[x][y + i] == 1) {
+                    counter = +1;
+                }
+                if (matrix[x - 1][y + i] == 1) {
+                    counter = +1;
+                }
+            }
+
+        }
+        if (matrix[x][y] == 1) {
+            counter -= 1;
         }
         return counter;
     }
 
     public void nextState() {
-        for (int i = 0; i < Size; i++) {
-            for (int j = 0; j < Size; j++) {
-                if(matrix[i][j]==1&&(AliveNeighbours(i,j)<2||AliveNeighbours(i,j)>3)){
-                    matrix[i][j]=0;
-                }
-                else if (matrix[i][j]==0&&AliveNeighbours(i,j)==3){
-                    matrix[i][j]=1;
-                }
-                else{
-                    matrix[i][j]=1;
+        for (int i = 0; i < Size-1; i++) {
+            for (int j = 0; j < Size-1; j++) {
+                if (matrix[i][j] == 1 && (AliveNeighbours(i, j) < 2 || AliveNeighbours(i, j) > 3)) {
+                    matrix[i][j] = 0;
+                } else if (matrix[i][j] == 0 && AliveNeighbours(i, j) == 3) {
+                    matrix[i][j] = 1;
+                } else {
+                    matrix[i][j] = 1;
                 }
             }
         }
         printMatrix(matrix);
     }
 
-    public void printMatrix(int[][] m){
+    public void printMatrix(int[][] m) {
         for (int i = 0; i < Size; i++) {
-            for (int j = 0; j < Size; j++){
+            for (int j = 0; j < Size; j++) {
                 System.out.print(m[i][j]);
             }
             System.out.println("");

@@ -5,5 +5,7 @@ public class GameOfLifeMain {
         System.out.println("aa");
         //StdDraw.setCanvasSize(1000, 1000);
         game.nextState();
+        game.nextState();
+        game.nextState();
     }
 }
