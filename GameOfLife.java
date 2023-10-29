@@ -55,13 +55,19 @@ public class GameOfLife {
         int counter = 0;
         System.out.println("matrix x,y: "+matrix[x][y]);
         for (int i = 0; i < 3; i++) {
-            if (matrix[x - 1][i] == 1) {
+            if (x==0){
+                //skip next
+            }
+            else if (matrix[x - 1][i] == 1) {
                 counter += 1;
             }
             if (matrix[x][i] == 1) {
                 counter += 1;
             }
-            if (matrix[x + 1][i] == 1) {
+            if(x==Size){
+                //skip next
+            }
+            else if (matrix[x + 1][i] == 1) {
                 counter += 1;
             }
         }
@@ -72,7 +78,6 @@ public class GameOfLife {
     }
 
     public void nextState() {
-
     }
 
     /*
