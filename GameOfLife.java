@@ -1,4 +1,3 @@
-import java.util.random;
 public class GameOfLife {
     // felter
     private int[][] matrix;
@@ -10,14 +9,14 @@ public class GameOfLife {
         initGame();
     }
 
-    public GameOfLife(int[][] initialState) {
+    /*public GameOfLife(int[][] initialState) {
         Random rand = new Random();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 matrix[i][j] = rand.nextInt(1);
             }
         }
-    }
+    }*/
 
     public void initGame() {
         this.matrix = new int[Size][Size];
